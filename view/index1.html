@@ -1,0 +1,129 @@
+ 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Asistencia</title>
+    <!-- Incluir la API de Google Maps -->
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
+</head>
+<body>
+    <h1>Control de Asistencia</h1>
+    <div id="mapa" style="height: 400px;"></div>
+    <button onclick="marcarAsistencia()">Marcar Asistencia</button>
+ <p id="status"></p>
+    <script type="text/javascript">
+        let mapa;
+        let puestoDeControl = { lat: -11.252678, lng: -74.6371154 };
+
+        function initMap() {
+            // Crear el mapa centrado en el puesto de control
+            mapa = new google.maps.Map(document.getElementById("mapa"), {
+                center: puestoDeControl,
+                zoom: 15,
+                center: coord
+            });
+
+        }
+
+  function marcarAsistencia() {
+            const status = document.getElementById('status');
+            status.textContent = 'Localizando...';
+
+            if (!navigator.geolocation) {
+                status.textContent = 'La geolocalización no es soportada por tu navegador.';
+                return;
+            }
+
+            const opciones = {
+                enableHighAccuracy: true, // Solicitar alta precisión
+                timeout: 10000,           // Tiempo máximo de espera
+                maximumAge: 0             // No usar caché
+            };
+
+            navigator.geolocation.getCurrentPosition((position) => {
+                const ubicacionUsuario = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                const distancia = calcularDistancia(ubicacionUsuario, puestoDeControl);
+                const coordenadas = `Latitud: ${ubicacionUsuario.lat}, Longitud: ${ubicacionUsuario.lng}`;
+                let mensajeRadio;
+
+                if (distancia <= 100) {
+                    mensajeRadio = `Dentro de un radio de ${Math.round(distancia)} metros. ¡Asistencia marcada correctamente!`;
+                } else {
+                    mensajeRadio = `Fuera del rango permitido (${Math.round(distancia)} metros). No puedes marcar asistencia.`;
+                }
+
+                status.textContent = `${coordenadas}. ${mensajeRadio}`;
+            }, (error) => {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        status.textContent = "Permiso denegado por el usuario.";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        status.textContent = "Información de ubicación no disponible.";
+                        break;
+                    case error.TIMEOUT:
+                        status.textContent = "La solicitud de ubicación ha expirado.";
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        status.textContent = "Un error desconocido ocurrió.";
+                        break;
+                }
+            }, opciones);
+        }
+     /*function marcarAsistencia() {
+            // Obtener la ubicación actual del usuario
+            navigator.geolocation.getCurrentPosition(function(posicion) {
+                let ubicacionUsuario = {
+                    lat: posicion.coords.latitude,
+                    lng: posicion.coords.longitude
+                };
+
+                // Calcular la distancia entre la ubicación del usuario y el puesto de control
+                let distancia = calcularDistancia(ubicacionUsuario, puestoDeControl);
+
+                // Formatear las coordenadas
+                let coordenadas = `Latitud: ${ubicacionUsuario.lat}, Longitud: ${ubicacionUsuario.lng}`;
+
+                // Calcular el radio dinámicamente
+                let radio = 100; // Esto puede ser ajustado según tus necesidades
+                let mensajeRadio = `Fuera del rango permitido (${Math.round(distancia)} metros)`;
+                if (distancia <= radio) {
+                    mensajeRadio = `Dentro de un radio de ${Math.round(distancia)} metros`;
+                }
+
+                // Verificar si la distancia es menor o igual al radio permitido
+                if (distancia <= radio) {
+                    alert(`¡Asistencia marcada correctamente! Coordenadas: ${coordenadas}. ${mensajeRadio}`);
+                    // Aquí puedes agregar código adicional para registrar la asistencia en tu sistema
+                } else {
+                    alert(`No estás dentro del rango permitido para marcar asistencia. Coordenadas: ${coordenadas}. ${mensajeRadio}`);
+                }
+            }, function(error) {
+                alert("Error al obtener la ubicación: " + error.message);
+            });
+        }*/
+
+        // Función para calcular la distancia entre dos puntos
+        function calcularDistancia(puntoA, puntoB) {
+            const R = 6371e3; // Radio de la Tierra en metros
+            const lat1 = puntoA.lat * Math.PI / 180; // Convertir latitud de grados a radianes
+            const lat2 = puntoB.lat * Math.PI / 180;
+            const deltaLat = (puntoB.lat - puntoA.lat) * Math.PI / 180;
+            const deltaLng = (puntoB.lng - puntoA.lng) * Math.PI / 180;
+
+            const a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+                      Math.cos(lat1) * Math.cos(lat2) *
+                      Math.sin(deltaLng / 2) * Math.sin(deltaLng / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            return R * c; // Distancia en metros
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+ <div class="row" >
+    <div class="col-sm-6 col-md-3">
+        <div class="tile">
+          <!-- Contenido de la segunda columna -->
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="tile">
+            <!-- Contenido de la segunda columna -->
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="tile">
+            <!-- Contenido de la tercera columna -->
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="tile">
+            <!-- Contenido de la cuarta columna -->
+        </div>
+    </div>
+ </div>

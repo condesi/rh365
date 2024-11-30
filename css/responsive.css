@@ -1,0 +1,177 @@
+/* Estilos para dispositivos móviles con ancho de pantalla de hasta 767px */
+
+#fotter-logo {
+    margin: 0px 0px -35px 0px;
+    background: red;
+}
+@media (max-width: 767px) {
+    #fotter-logo {
+        margin: 0px 0px 0px 0px;
+    }
+}
+/* Estilos para tablets con ancho de pantalla de 768px a 1023px */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .clase-elemento {
+        font-size: 16px;
+    }
+}
+/* Estilos para pantallas móviles */
+
+@media only screen and (max-width: 600px) {
+    /* .modal-content {
+        width: 90%;
+        margin: 10% auto;
+        background: red;
+    }
+    #modal_editarRegister {
+        background: red;
+    }*/
+}
+.app-menu__item:hover .app-menu__icon, .app-menu__label, .treeview-indicator {
+    color: white;
+    cursor: pointer;
+}
+#input_search {
+    font-family: sans-serif;
+    background: #636868;
+    font-size: 14px;
+    margin: 5px;
+    padding-left: 17px;
+    height: 40px;
+}
+/*rote icon*/
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.fa-refresh {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: rotate 2s infinite linear;
+}
+#previewContainer {
+    display: flex;
+    /* align-items: center;*/
+    justify-content: center;
+    position: relative;
+}
+#preview1 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 160px;
+    display: inline-block;
+    margin: 0 auto;
+}
+#mostrarimagen {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 160px;
+    display: inline-block;
+    margin: 0 auto;
+}
+#removeButton:hover {
+    background-color: #ffffff;
+}
+#removeButton {
+    position: absolute;
+    /*top: 0;
+    right: 0*/
+}
+#photo1 {
+    margin-top: 10px;
+    border-color: #0ad791;
+    width: 85%;
+}
+/*Loading*/
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*background: rgba(255, 255, 255, 0.8);*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    display: none;
+}
+.loading-spinner {
+    width: 70px;
+    /* Ajusta el tamaño según tu necesidad */
+    height: 70px;
+}
+.loading-logo {
+    width: 20px;
+    /* Ajusta el tamaño del logo según sea necesario */
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Añade más estilos según tus necesidades */
+}
+@media only screen and (max-width: 600px) {
+    .loading-spinner {
+        width: 50px;
+        /* Ajusta el tamaño según tu necesidad */
+        height: 50px;
+    }
+    .loading-logo {
+        width: 10px;
+        /* Ajusta el tamaño del logo según sea necesario */
+        height: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* Añade más estilos según tus necesidades */
+    }
+}
+
+/*nuevo sprinter*/
+.overlay_load {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Posición fija para que se mantenga en el mismo lugar al hacer scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    z-index: 9999; /* Asegúrate de que está por encima de otros elementos */
+    text-align: center; /* Centra el contenido horizontalmente */
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center;
+    display: flex; /* Usa flexbox para centrar el contenido */
+}
+
+
+/*table*/
+  .table-xs th {
+      padding: 2px;
+      border: 0;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+  }
+    
+  .table-xs tbody {
+      border-top: 0;
+  }
+    
+  .table> :not(:first-child) {
+      border-top: 0;
+  }
+    
+  .table-xs td {
+      padding: 1px 1px;
+      font-size: 11px;
+  }
+    
+  .table-xs tr {
+      height: 20px !important;
+  }
